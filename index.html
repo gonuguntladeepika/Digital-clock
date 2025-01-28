@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Digital Clock</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(135deg, #4a90e2, #9013fe);
+      color: #fff;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .clock-container {
+      text-align: center;
+      background: rgba(255, 255, 255, 0.1);
+      padding: 20px 40px;
+      border-radius: 15px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+      backdrop-filter: blur(10px);
+    }
+
+    .clock {
+      font-size: 3rem;
+      letter-spacing: 2px;
+      margin: 10px 0;
+    }
+
+    .date {
+      font-size: 1.2rem;
+      margin-top: 10px;
+    }
+
+    .clock span {
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="clock-container">
+    <div class="clock" id="clock">00:00:00</div>
+    <div class="date" id="date">Loading date...</div>
+  </div>
+
+  <script>
+    function updateClock() {
+      const now = new Date();
+      const hours = String(now.getHours()).padStart(2, '0');
+      const minutes = String(now.getMinutes()).padStart(2, '0');
+      const seconds = String(now.getSeconds()).padStart(2, '0');
+      const clockElement = document.getElementById('clock');
+      const dateElement = document.getElementById('date');
+
+      clockElement.textContent = `${hours}:${minutes}:${seconds}`;
+
+      const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+      const formattedDate = now.toLocaleDateString(undefined, options);
+      dateElement.textContent = formattedDate;
+    }
+
+    setInterval(updateClock, 1000);
+    updateClock();
+  </script>
+</body>
+</html>
